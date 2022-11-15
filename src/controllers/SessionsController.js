@@ -1,5 +1,5 @@
-const { compare } = require("bcryptjs");
 const knex = require("../database/knex");
+const { compare } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const authConfig = require("../configs/auth");
 const {sign} = require("jsonwebtoken")
@@ -16,7 +16,7 @@ class SessionsController {
 
         const passwordMatched = await compare(password, user.password)
 
-        if(passwordMatched){
+        if(!passwordMatched){
             throw new AppError("E-mail e/ou senha incorreta", 401)
         }
 
